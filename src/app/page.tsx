@@ -1,4 +1,4 @@
-import { Boxes, PackageCheck, TriangleAlert, Truck } from "lucide-react";
+import { PackageCheck, TriangleAlert, Truck } from "lucide-react";
 import StatCard from "@/components/StatCard";
 import ThroughputChart from "@/components/ThroughputChart";
 import CategoryChart from "@/components/CategoryChart";
@@ -23,7 +23,7 @@ export default function Home() {
 
       <main className="mx-auto max-w-7xl space-y-6 px-6 py-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Total Units in Stock" value={totalUnits.toLocaleString()} icon={Boxes} delta="Across 4 categories" deltaTone="neutral" />
+          <StatCard label="Total Units in Stock" value={totalUnits.toLocaleString()} iconSrc="/icons/total-units.png" delta="Across 4 categories" deltaTone="neutral" />
           <StatCard label="Low Stock Items" value={String(lowStock)} icon={TriangleAlert} delta="Needs reorder soon" deltaTone="negative" />
           <StatCard label="Out of Stock" value={String(outOfStock)} icon={PackageCheck} delta="Blocking fulfillment" deltaTone="negative" />
           <StatCard label="Shipments in Progress" value={String(inTransit)} icon={Truck} delta="Scheduled + In Transit" deltaTone="positive" />
