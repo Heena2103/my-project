@@ -3,12 +3,12 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { categoryBreakdown } from "@/lib/data";
 
-const COLORS = ["#2563eb", "#f97316", "#10b981", "#a855f7"];
+const COLORS = ["#2563eb", "#f97316", "#10b981", "#a855f7", "#0ea5e9"];
 
 export default function CategoryChart() {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h3 className="text-sm font-semibold text-slate-900">Stock by Category</h3>
+      <h3 className="text-sm font-semibold text-slate-900">Stock by Item</h3>
       <p className="text-xs text-slate-500">Total units on hand</p>
       <div className="mt-4 h-72">
         <ResponsiveContainer width="100%" height="100%">

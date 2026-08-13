@@ -12,7 +12,7 @@ export default function InventoryTable() {
       <div className="flex items-center justify-between p-5 pb-0">
         <div>
           <h3 className="text-sm font-semibold text-slate-900">Inventory</h3>
-          <p className="text-xs text-slate-500">Live stock levels across the warehouse</p>
+          <p className="text-xs text-slate-500">Stock on hand, SHJ warehouse</p>
         </div>
       </div>
       <div className="mt-4 overflow-x-auto">
@@ -22,7 +22,7 @@ export default function InventoryTable() {
               <th className="px-5 py-2 font-medium">SKU</th>
               <th className="px-5 py-2 font-medium">Item</th>
               <th className="px-5 py-2 font-medium">Category</th>
-              <th className="px-5 py-2 font-medium">Location</th>
+              <th className="px-5 py-2 font-medium text-right">Box Size</th>
               <th className="px-5 py-2 font-medium text-right">Qty</th>
               <th className="px-5 py-2 font-medium text-right">Reorder At</th>
               <th className="px-5 py-2 font-medium">Status</th>
@@ -34,7 +34,7 @@ export default function InventoryTable() {
                 <td className="px-5 py-3 font-mono text-xs text-slate-500">{item.sku}</td>
                 <td className="px-5 py-3 font-medium text-slate-900">{item.name}</td>
                 <td className="px-5 py-3 text-slate-600">{item.category}</td>
-                <td className="px-5 py-3 text-slate-600">{item.location}</td>
+                <td className="px-5 py-3 text-right text-slate-600">{item.boxSize} pcs</td>
                 <td className="px-5 py-3 text-right text-slate-900">{item.quantity.toLocaleString()}</td>
                 <td className="px-5 py-3 text-right text-slate-500">{item.reorderLevel.toLocaleString()}</td>
                 <td className="px-5 py-3">

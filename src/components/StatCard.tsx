@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { LucideIcon } from "lucide-react";
 
 type Props = {
@@ -26,7 +25,8 @@ export default function StatCard({ label, value, delta, deltaTone = "neutral", i
         </div>
         {iconSrc ? (
           <div className="h-10 w-10 overflow-hidden rounded-lg">
-            <Image src={iconSrc} alt={label} width={40} height={40} className="h-full w-full object-cover" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={iconSrc} alt={label} width={40} height={40} className="h-full w-full object-cover" />
           </div>
         ) : Icon ? (
           <div className="rounded-lg bg-slate-100 p-2">

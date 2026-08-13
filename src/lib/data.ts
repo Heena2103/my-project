@@ -1,3 +1,7 @@
+// Sourced from "D:\Sharjah Warehouse\Store Items\SHJ Files\Inventory.xlsx"
+// Reorder levels are not in the source file — estimated at ~25% of "Received"
+// totals per item so Low Stock status has something to trigger on.
+
 export type InventoryItem = {
   id: string;
   sku: string;
@@ -5,54 +9,50 @@ export type InventoryItem = {
   category: string;
   quantity: number;
   reorderLevel: number;
-  location: string;
+  boxSize: number;
   status: "In Stock" | "Low Stock" | "Out of Stock";
 };
 
 export const inventory: InventoryItem[] = [
-  { id: "1", sku: "SKU-1001", name: "Steel Pallet Rack", category: "Storage", quantity: 240, reorderLevel: 50, location: "A1-03", status: "In Stock" },
-  { id: "2", sku: "SKU-1002", name: "Forklift Battery Pack", category: "Equipment", quantity: 12, reorderLevel: 15, location: "B2-11", status: "Low Stock" },
-  { id: "3", sku: "SKU-1003", name: "Cardboard Boxes (L)", category: "Packaging", quantity: 3800, reorderLevel: 500, location: "C1-01", status: "In Stock" },
-  { id: "4", sku: "SKU-1004", name: "Shrink Wrap Rolls", category: "Packaging", quantity: 0, reorderLevel: 100, location: "C1-05", status: "Out of Stock" },
-  { id: "5", sku: "SKU-1005", name: "Safety Helmets", category: "Safety", quantity: 88, reorderLevel: 40, location: "D3-02", status: "In Stock" },
-  { id: "6", sku: "SKU-1006", name: "Barcode Scanners", category: "Equipment", quantity: 9, reorderLevel: 10, location: "B2-14", status: "Low Stock" },
-  { id: "7", sku: "SKU-1007", name: "Wooden Pallets", category: "Storage", quantity: 620, reorderLevel: 150, location: "A2-08", status: "In Stock" },
-  { id: "8", sku: "SKU-1008", name: "Fire Extinguishers", category: "Safety", quantity: 22, reorderLevel: 20, location: "D1-01", status: "In Stock" },
-  { id: "9", sku: "SKU-1009", name: "Packing Tape", category: "Packaging", quantity: 45, reorderLevel: 200, location: "C1-09", status: "Low Stock" },
-  { id: "10", sku: "SKU-1010", name: "Loading Dock Ramps", category: "Equipment", quantity: 0, reorderLevel: 4, location: "E1-01", status: "Out of Stock" },
+  { id: "1", sku: "BMS-01", name: "BMS", category: "BMS", quantity: 391, reorderLevel: 100, boxSize: 14, status: "In Stock" },
+  { id: "2", sku: "MC-CHG-01", name: "Motor Cycle Charger", category: "Charger", quantity: 8, reorderLevel: 10, boxSize: 1, status: "Low Stock" },
+  { id: "3", sku: "MC-CEL-01", name: "Motor Cycle Cells", category: "Cells", quantity: 10, reorderLevel: 15, boxSize: 1, status: "Low Stock" },
+  { id: "4", sku: "CEL-BLK-01", name: "Cells Black", category: "Cells", quantity: 199, reorderLevel: 50, boxSize: 8, status: "In Stock" },
+  { id: "5", sku: "CEL-BLU-01", name: "Cells Blue", category: "Cells", quantity: 150, reorderLevel: 50, boxSize: 8, status: "In Stock" },
 ];
 
-export type Shipment = {
+export type StockMovement = {
   id: string;
-  ref: string;
+  item: string;
   type: "Inbound" | "Outbound";
-  partner: string;
-  items: number;
-  status: "Scheduled" | "In Transit" | "Delivered" | "Delayed";
+  quantity: number;
   date: string;
+  note?: string;
 };
 
-export const shipments: Shipment[] = [
-  { id: "1", ref: "SHP-2201", type: "Inbound", partner: "Al Futtaim Logistics", items: 340, status: "In Transit", date: "2026-08-13" },
-  { id: "2", ref: "SHP-2202", type: "Outbound", partner: "Carrefour UAE", items: 120, status: "Scheduled", date: "2026-08-13" },
-  { id: "3", ref: "SHP-2203", type: "Outbound", partner: "Lulu Hypermarket", items: 75, status: "Delivered", date: "2026-08-11" },
-  { id: "4", ref: "SHP-2204", type: "Inbound", partner: "Gulftainer", items: 500, status: "Delayed", date: "2026-08-12" },
-  { id: "5", ref: "SHP-2205", type: "Outbound", partner: "Noon Fulfillment", items: 210, status: "Scheduled", date: "2026-08-14" },
+// Most recent movements first, taken from each sheet's dated Received/Sent columns.
+export const shipments: StockMovement[] = [
+  { id: "1", item: "Cells Black", type: "Inbound", quantity: 200, date: "2026-08-11" },
+  { id: "2", item: "Cells Black", type: "Outbound", quantity: 1, date: "2026-08-11", note: "To Amin as sample" },
+  { id: "3", item: "BMS", type: "Outbound", quantity: 163, date: "2026-07-24" },
+  { id: "4", item: "Cells Black", type: "Outbound", quantity: 150, date: "2026-07-21" },
+  { id: "5", item: "Cells Black", type: "Inbound", quantity: 200, date: "2026-07-07" },
+  { id: "6", item: "Cells Black", type: "Outbound", quantity: 50, date: "2026-07-07" },
+  { id: "7", item: "Cells Blue", type: "Inbound", quantity: 200, date: "2026-07-06" },
+  { id: "8", item: "Cells Blue", type: "Outbound", quantity: 50, date: "2026-07-06" },
 ];
 
-export const weeklyThroughput = [
-  { day: "Mon", inbound: 420, outbound: 380 },
-  { day: "Tue", inbound: 510, outbound: 460 },
-  { day: "Wed", inbound: 380, outbound: 490 },
-  { day: "Thu", inbound: 600, outbound: 520 },
-  { day: "Fri", inbound: 460, outbound: 610 },
-  { day: "Sat", inbound: 300, outbound: 340 },
-  { day: "Sun", inbound: 180, outbound: 200 },
+// Received vs. Sent aggregated by month across all items in the sheet.
+export const monthlyThroughput = [
+  { month: "Apr", received: 954, sent: 200 },
+  { month: "Jun", received: 20, sent: 200 },
+  { month: "Jul", received: 400, sent: 415 },
+  { month: "Aug", received: 200, sent: 1 },
 ];
 
-export const categoryBreakdown = [
-  { name: "Storage", value: 860 },
-  { name: "Packaging", value: 3845 },
-  { name: "Equipment", value: 21 },
-  { name: "Safety", value: 110 },
-];
+export const categoryBreakdown = inventory.map((i) => ({ name: i.name, value: i.quantity }));
+
+export const totalsAllTime = {
+  received: monthlyThroughput.reduce((sum, m) => sum + m.received, 0),
+  sent: monthlyThroughput.reduce((sum, m) => sum + m.sent, 0),
+};
